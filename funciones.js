@@ -36,18 +36,57 @@ const imagenes = {prestamos: 'prestamosbiblio.jpg', socios: 'userbiblio.jpg', in
 
 export function listaPrestamos() {
     // crea una lista de préstamos y la devuelve
-    
+    const ul = document.createElement('ul');
+    ul.className = 'list-group';
+    arrayPrestamos.forEach( prestamo => {
+        const li = document.createElement('li');
+        li.className = 'list-group-item';
+        li.innerHTML = `Prestamo: ${prestamo.id} - ${prestamo.titulo} - ${prestamo.autor}`;
+        ul.appendChild(li);
+    } );
+    return ul;
 }
     
 
 export function imgPrestamos() {
     // devuelve la imagen de préstamos
+    return imagenes.prestamos;
 }
 
 export function listaSocios() {
     // Crea y devuelve la lista de socios
+    const tabla = document.createElement('table');
+    tabla.classList='table table-stripped';
+    const arrayItems = ['idSocio', 'Nombre', 'mail'];
+    const thead = document.createElement('thead');
+    const tr = document.createElement('tr');
+    arrayItems.forEach( item => {
+        const th = document.createElement('th');
+        th.innerHTML = item;
+        tr.appendChild(th);
+    } );
+    thead.appendChild(tr);
+    const tbody = document.createElement('tbody');
+    arraySocios.forEach( socio => {
+        const tr1 = document.createElement('tr');
+        const td0 = document.createElement('td');
+        const td1 = document.createElement('td');
+        const td2 = document.createElement('td');
+        td0.innerHTML = socio.idSocio;
+        td1.innerHTML = socio.nombre;
+        td2.innerHTML = socio.mail;
+        tr1.appendChild(td0);
+        tr1.appendChild(td1);
+        tr1.appendChild(td2);
+        tbody.appendChild(tr1);
+    } );
+    tabla.appendChild(thead);
+    tabla.appendChild(tbody);
+    return tabla;
+
 }
 
 export function imgSocios() {
     // devuelve laimagen de socios
+    return imagenes.socios;
 }
